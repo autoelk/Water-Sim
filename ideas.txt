@@ -1,0 +1,19 @@
+water comes in blocks, to allow for easier coding
+changes between 3 states
+
+ends don't justify the means?
+
+maybe main character is water
+enemies are fire
+
+going towards hell, levels start with lots of water, progressively more fire, allows for difficulty increase
+
+you play as the "hero / king" water the only water that can control its own movements
+
+when you combine with other bodies of water you are absorbing them, basically killing them
+
+
+
+
+
+water and fire work together to get rid of pollution
