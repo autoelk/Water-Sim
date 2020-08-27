@@ -6,12 +6,12 @@ function love.load()
   
   grid = {}
   tileSize = 20
-  gridHeight = screenHeight / tileSize
-  gridWidth = screenWidth / tileSize
+  gridHeight = math.floor(screenHeight / tileSize)
+  gridWidth = math.floor(screenWidth / tileSize)
 
-  for i=1,gridHeight + 1 do
+  for i=1,gridHeight + 5 do
     grid[i] = {}
-    for j=1,gridWidth do
+    for j=1,gridWidth + 5 do
       grid[i][j] = 0;
     end
   end
@@ -36,7 +36,7 @@ end
 timer = 0
 function love.update(dt)
   timer = timer + dt
-  if timer >= 0.2 then
+  if timer >= 0.1 then
     updateAll()
     timer = 0
   end
@@ -54,15 +54,17 @@ function love.draw()
   for i=1,gridHeight do
     for j=1,gridWidth do
       if grid[i][j] == -1 then
-        love.graphics.setColor(0, 0, 1)
+        love.graphics.setColor(0, 0, 0)
         love.graphics.rectangle("fill", j * tileSize - tileSize, i * tileSize - tileSize, tileSize, tileSize)
       end
       if grid[i][j] > 0 then
-        love.graphics.setColor(0, 0, 1, 0.5)
+        love.graphics.setColor(0, 0, 1, grid[i][j] / 2)
+        love.graphics.rectangle("fill", j * tileSize - tileSize, i * tileSize - tileSize, tileSize, tileSize)
+        -- love.graphics.setColor(0, 0, 1, 0.5)
         love.graphics.rectangle("fill", j * tileSize - tileSize, (i - grid[i][j]) * tileSize, tileSize, tileSize * grid[i][j])
       end
       -- love.graphics.setColor(0, 0, 0)
-      -- love.graphics.printf(grid[i][j], j * 50, i * 50 + tileSize / 2, 50, "center")
+      -- love.graphics.printf(math.floor(grid[i][j] * 100) / 100, j * 50, i * 50 + tileSize / 2, 50, "center")
     end
   end
 end
@@ -83,6 +85,7 @@ function updateAll()
       if grid[i][j] > 0 and (grid[i + 1][j] == -1 or grid[i + 1][j] >= 1) then
         spread(i, j)
       end
+      grid[i][j] = math.floor(grid[i][j] * 1000000) / 1000000
     end
   end
 end
